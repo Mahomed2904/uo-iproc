@@ -4,10 +4,8 @@ Python library of classic (non-learned) underwater image color-restoration and e
 algorithms, implemented against a single, uniform interface so any of them can be swapped in as a
 drop-in preprocessing step.
 
-**This library is not tied to any one application.** It was extracted from
-`UnderwaterObservserApp` (a reef-monitoring device that runs one of these algorithms before
-on-device fish detection), but there is nothing in the code that depends on that use case, on a
-detection pipeline, or on any particular hardware. Underwater image color restoration/enhancement
+**This library is not tied to any one application.** Nothing in the code depends on a
+detection pipeline or on any particular hardware. Underwater image color restoration/enhancement
 is a general problem — turbidity and color-cast correction, contrast/dehazing, dataset
 preprocessing before training a vision model, or improving footage for human review are all valid
 uses. Any project that needs to correct the color cast, haze, or low contrast typical of
@@ -74,19 +72,18 @@ enhanced = CLAHE_IE.apply(img)     # histogram-based enhancement
 ```
 
 Because every implementation shares this interface, an algorithm can be chosen at runtime (e.g.
-by name/config) without the caller needing an `if/elif` per algorithm — this is how
-`UnderwaterObservserApp`'s `ImagesPreprocessorFactory` selects one of them before running
-detection, but the same pattern applies to any pipeline that wants a swappable preprocessing
-step.
+by name/config) without the caller needing an `if/elif` per algorithm.
 
 ## Install
+
+From a checkout:
 
 ```
 pip install -e .
 ```
 
-## Origin
+Or as a pinned dependency:
 
-Extracted from `UnderwaterObservserApp/src/main/libs/iproc/`, where it originated as vendored,
-in-tree code, and pulled out into its own package so it can be reused and versioned independently
-of that application.
+```
+pip install "iproc @ git+ssh://git@github.com/Mahomed2904/uo-iproc.git@v0.1.0"
+```

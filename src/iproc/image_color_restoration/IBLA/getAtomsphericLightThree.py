@@ -32,9 +32,8 @@ def quadTree(img,I_gray_Q):
 
 
 def getAtomsphericLightLb(img, BlurrnessMap):
-    # BlurrnessMap is now passed in by the caller (already computed once in
-    # main.py) rather than recomputed here — it used to call blurrnessMap()
-    # a second time with the exact same arguments, redoing 4 GaussianBlur
+    # BlurrnessMap is passed in by the caller (already computed once in
+    # main.py) rather than recomputed here, which would redo 4 GaussianBlur
     # passes + a windowed max filter + a bilateralFilter for nothing.
     for i in range(0, 5):
         img, BlurrnessMap = quadTree(img, BlurrnessMap)
